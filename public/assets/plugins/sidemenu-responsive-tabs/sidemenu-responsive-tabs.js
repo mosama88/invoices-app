@@ -45,7 +45,7 @@
                     $respTabsList.css('margin-top', '3px');
 
                 $respTabs.find('.resp-tabs-container.' + options.tabidentify).css('border-color', options.active_content_border_color);
-                $respTabs.find('.resp-tabs-container.' + options.tabidentify + ' > div').addClass('resp-tab-content').addClass(options.tabidentify);
+                $respTabs.find('.resp-tabs-container.' + options.tabidentify + ' > li').addClass('resp-tab-content').addClass(options.tabidentify);
                 jtab_options();
                 //Properties Function
                 function jtab_options() {

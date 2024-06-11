@@ -178,7 +178,7 @@ function create(input, value) {
         throw new ParchmentError("Unable to create " + input + " blot");
     }
     var BlotClass = match;
-    var node = 
+    var node =
     // @ts-ignore
     input instanceof Node || input['nodeType'] === Node.TEXT_NODE ? input : BlotClass.create(value);
     return new BlotClass(node, value);
@@ -7381,7 +7381,7 @@ function diff_halfMatch_(text1, text2) {
 
 
 /**
- * Reorder and merge like edit sections.  Merge equalities.
+ * Reorder and merge like edit departments.  Merge equalities.
  * Any edit section can move as long as it doesn't cross an equality.
  * @param {Array} diffs Array of diff tuples.
  */
