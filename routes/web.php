@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvoicesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,14 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', function () {
+    if(Auth::check()){
+    return view('home');
+}else{
     return view('auth.login');
+}
 });
 
+Route::resource('/Invoices', InvoicesController::class);
 // Authintication
 Auth::routes();
 // Auth::routes(['register' => false]);
