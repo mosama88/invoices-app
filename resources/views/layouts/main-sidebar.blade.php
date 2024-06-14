@@ -86,7 +86,6 @@
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'mail')) }}">قائمة المستخدمين</a></li>
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'mail-compose')) }}">الصلاحيات المستخدمين</a></li>
             </li>
-            <li><a class="slide-item" href="{{ url('/' . ($page = 'chat')) }}">Chat</a></li>
         </ul>
         </li>
         <li class="side-item side-item-category">الأعدادات</li>
@@ -117,7 +116,7 @@
                     </g>
                 </svg><span class="side-menu__label">الأعدادات</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'profile')) }}">أضافة قسم</a></li>
+                <li><a class="slide-item" href="{{ url('/' . ($page = 'profile')) }}">الأقسام</a></li>
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'editprofile')) }}">أضافة منتج</a></li>
                 
             </ul>
