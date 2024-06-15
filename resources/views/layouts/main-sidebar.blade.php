@@ -116,7 +116,7 @@
                     </g>
                 </svg><span class="side-menu__label">الأعدادات</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'profile')) }}">الأقسام</a></li>
+                <li><a class="slide-item" href="{{ url('/' . ($page = 'sections')) }}">الأقسام</a></li>
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'editprofile')) }}">أضافة منتج</a></li>
                 
             </ul>

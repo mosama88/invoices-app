@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\SectionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/Invoices', InvoicesController::class);
+Route::resource('/sections', SectionsController::class);
 // Authintication
 Auth::routes();
 // Auth::routes(['register' => false]);
