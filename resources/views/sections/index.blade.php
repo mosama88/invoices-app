@@ -49,12 +49,20 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         {{-- Error --}}
-                        @if (session()->has('Error'))
-                        <div class="alert alert-danger text-center">
-                            {{ session()->get('Error')}}
-                        </div>
-                @endif
-                {{-- Success --}}
+                        {{-- @if (session()->has('Error'))
+                            <div class="alert alert-danger text-center">
+                                {{ session()->get('Error') }}
+                            </div>
+                        @endif --}}
+
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger text-center">
+                                    {{ $error }}
+                                </div>
+                            @endforeach
+                        @endif
+                        {{-- Success --}}
                         @if (session('success') != null)
                             <div class="alert alert-success text-center">
                                 {{ session('success') }}
@@ -71,9 +79,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $i = 0; ?>
                                 @foreach ($sections as $section)
+                                    <?php $i++; ?>
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{ $i }}</td>
                                         <td>{{ $section->section_name }}</td>
                                         <td>{{ $section->description }}</td>
                                         <td>{{ $section->created_by }}</td>
@@ -89,6 +99,7 @@
                                                 <i class="fas fa-trash-alt"></i></a>
                                         </td>
                                         @include('sections.edit')
+                                        @include('sections.delete')
                                     </tr>
                                 @endforeach
 
@@ -101,10 +112,17 @@
         <!--/div-->
     </div>
     <!-- row closed -->
+
+
     </div>
     <!-- Container closed -->
     </div>
     <!-- main-content closed -->
+
+
+
+
+
 @endsection
 @section('js')
     <!-- Internal Data tables -->

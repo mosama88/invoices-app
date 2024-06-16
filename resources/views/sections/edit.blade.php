@@ -7,9 +7,10 @@
                       type="button"><span aria-hidden="true">&times;</span></button>
               </div>
               <div class="modal-body">
-                  <form action="{{ route('sections.update', $section->id) }}" method="POST">
+                  <form action="{{ route('sections.update', $section->id) }}" method="POST" autocomplete="off">
                       @csrf
                       @method('PUT')
+                      <input type="hidden" name="id" id="id" value="{{ $section->id }}">
                       <div class="">
                           <div class="form-group">
                               <label for="exampleInputSection">أسم القسم</label>
@@ -21,8 +22,8 @@
                           </div>
                           <div class="form-group">
                               <label for="exampleInputDesc">الوصف</label>
-                              <textarea id="exampleInputDesc" value="{{ $section->description }}" class="form-control" name="description"
-                                  placeholder="Textarea" rows="3"></textarea>
+                              <textarea id="exampleInputDesc"  class="form-control" name="description"
+                                  placeholder="Textarea" rows="3">{{ $section->description }}</textarea>
                               @error('description')
                                   <div class="alert alert-danger">{{ $message }}</div>
                               @enderror
