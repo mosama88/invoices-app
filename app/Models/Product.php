@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -19,7 +20,7 @@ class Product extends Model
     
     public function section(){
 
-        return $this->belongsTo(Sections::class);
+        return $this->belongsTo(Section::class);
 
     }
 

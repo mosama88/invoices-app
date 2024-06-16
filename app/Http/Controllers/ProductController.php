@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Sections;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        $section = Sections::get();
+        $section = Section::get();
         return view('products.index',compact('products','section'));
     }
 
@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $sections = Sections::get();
+        $sections = Section::get();
         return view('products.add',['sections'=>$sections]);
 
     }

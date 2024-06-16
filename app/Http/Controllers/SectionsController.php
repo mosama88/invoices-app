@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sections;
+use App\Models\Section;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +13,7 @@ class SectionsController extends Controller
    
     public function index()
     {
-        $sections = Sections::orderBy('created_at', 'desc')->get();
+        $sections = Section::orderBy('created_at', 'desc')->get();
         return view('sections.index', ['sections'=>$sections]);
     }
 
@@ -27,7 +27,7 @@ class SectionsController extends Controller
   
     public function store(SectionsRequest $request)
     {
-        $sections = new Sections();
+        $sections = new Section();
         $sections->section_name = $request->section_name;
         $sections->description = $request->description;
         $sections->created_by = Auth::user()->name;
@@ -56,13 +56,13 @@ class SectionsController extends Controller
     }
 
  
-    public function show(Sections $sections)
+    public function show(Section $sections)
     {
         //
     }
 
 
-    public function edit(Sections $sections)
+    public function edit(Section $sections)
     {
         return view('sections.edit');
     }
@@ -104,7 +104,7 @@ class SectionsController extends Controller
             'description.min'=>'يجب ان يكون حقل الموبايل 3 رقم',
             'description.max'=>'يجب ان يكون حقل الموبايل 200 رقم',
         ]);
-        $sections = Sections::find($request->id);
+        $sections = Section::find($request->id);
 
         $sections->update([
             $sections->section_name = $request->section_name,
@@ -120,7 +120,7 @@ class SectionsController extends Controller
    
     public function destroy(Request $request)
     {
-        Sections::findOrFail($request->id)->delete();
+        Section::findOrFail($request->id)->delete();
 
         // Return a response indicating success
         session()->flash('success', 'تم حذف القسم بنجاح');
