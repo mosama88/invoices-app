@@ -11,9 +11,9 @@
                       @csrf
                       <div class="">
                           <div class="form-group">
-                              <label for="exampleInputSection">أسم المنتج</label>
-                              <input type="text" name="product_name" class="form-control" id="exampleInputSection"
-                                  placeholder="أسم القسم">
+                              <label for="exampleInputproduct">أسم المنتج</label>
+                              <input type="text" name="product_name" class="form-control" id="exampleInputproduct"
+                                  placeholder="أسم المنتج">
                               @error('product_name')
                                   <div class="alert alert-danger">{{ $message }}</div>
                               @enderror
@@ -21,16 +21,16 @@
 
                           <div class="form-group">
                               <p class="mg-b-10">القسم</p>
-                              <select name="section_name" class="form-control SlectBox"
+                              <select name="section_id" class="form-control SlectBox"
                                   onclick="console.log($(this).val())" onchange="console.log('change is firing')">
                                   <!--placeholder-->
                                   <option selected disabled>-- أختر القسم --</option>
-                                  @foreach ($sections as $section)
-                                      <div class="form-group">
-                                          <option value="{{ $section->id }}">{{ $section->section_name }}</option>
-                                  @endforeach
+                                  <div class="form-group">
+                                      @foreach ($section as $sec)
+                                          <option value="{{ $sec->id }}">{{ $sec->section_name }}</option>
+                                      @endforeach
                               </select>
-                              @error('section_name')
+                              @error('section_id')
                                   <div class="alert alert-danger">{{ $message }}</div>
                               @enderror
                           </div>

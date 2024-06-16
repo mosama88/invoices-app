@@ -23,8 +23,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $sections = Section::get();
-        return view('products.add',['sections'=>$sections]);
+        $section = Section::get();
+        return view('products.add',compact('section'));
 
     }
 
