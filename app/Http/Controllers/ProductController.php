@@ -23,7 +23,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $sections = Sections::get();
+        return view('products.add',['sections'=>$sections]);
+
     }
 
     /**

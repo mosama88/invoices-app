@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('product_name');
             $table->text('description')->nullable();
-            $table->foreignId('section_name')->references('id')->on('sections')->cascadeOnDelete();
+            $table->foreignId('section_id')->references('id')->on('sections')->cascadeOnDelete();
             $table->timestamps();
         });
     }

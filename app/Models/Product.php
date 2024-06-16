@@ -12,7 +12,7 @@ class Product extends Model
     protected $fillable = [
         'product_name',
         'description',
-        'section_name',
+        'section_id',
     ];
 
 
@@ -20,7 +20,7 @@ class Product extends Model
     public function section(){
 
         return $this->belongsTo(Sections::class);
-        
+
     }
 
     

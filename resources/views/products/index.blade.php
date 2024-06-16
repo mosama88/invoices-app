@@ -28,7 +28,7 @@
                 <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-flip-horizontal"
                     data-toggle="modal" href="#modaldemo8">أضافة منتج</a>
             </div>
-            @include('sections.add')
+            @include('products.add')
         </div>
     </div>
     <!-- breadcrumb -->
