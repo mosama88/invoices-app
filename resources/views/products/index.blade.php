@@ -74,7 +74,7 @@
                                     <th class="border-bottom-0">#</th>
                                     <th class="border-bottom-0">أسم المنتج</th>
                                     <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">بواسطة</th>
+                                    <th class="border-bottom-0">ملاحظات</th>
                                     <th class="border-bottom-0">العمليات</th>
                                 </tr>
                             </thead>
@@ -84,9 +84,9 @@
                                     <?php $i++; ?>
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{ $product->product_name }}</td>
+                                        <td>{{ $product->section->section_name }}</td>
+                                        <td>{{ $product->description }}</td>
                                         <td>
                                             {{-- Edit --}}
                                             <a class="modal-effect btn btn-outline-info btn-sm" data-effect="effect-scale"

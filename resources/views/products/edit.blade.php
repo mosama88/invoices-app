@@ -1,5 +1,5 @@
   <!-- Basic modal -->
-  <div class="modal" id="edit{{ $section->id }}">>
+  <div class="modal" id="edit{{ $product->id }}">>
       <div class="modal-dialog" role="document">
           <div class="modal-content modal-content-demo">
               <div class="modal-header">
@@ -7,23 +7,38 @@
                       type="button"><span aria-hidden="true">&times;</span></button>
               </div>
               <div class="modal-body">
-                  <form action="{{ route('sections.update', $section->id) }}" method="POST" autocomplete="off">
+                  <form action="{{ route('products.update', $product->id) }}" method="POST" autocomplete="off">
                       @csrf
                       @method('PUT')
-                      <input type="hidden" name="id" id="id" value="{{ $section->id }}">
+                      <input type="hidden" name="id" id="id" value="{{ $product->id }}">
                       <div class="">
                           <div class="form-group">
-                              <label for="exampleInputSection">أسم المنتج</label>
-                              <input type="text" name="section_name" value="{{ $section->section_name }}"
-                                  class="form-control" id="exampleInputSection" placeholder="أسم القسم">
-                              @error('section_name')
+                              <label for="exampleInputproduct">أسم المنتج</label>
+                              <input type="text" name="product_name" value="{{ $product->product_name }}"
+                                  class="form-control" id="exampleInputproduct" placeholder="أسم القسم">
+                              @error('product_name')
+                                  <div class="alert alert-danger">{{ $message }}</div>
+                              @enderror
+                          </div>
+                          <div class="form-group">
+                              <p class="mg-b-10">القسم</p>
+                              <select name="section_id" class="form-control SlectBox"
+                                  onclick="console.log($(this).val())" onchange="console.log('change is firing')">
+                                  <!--placeholder-->
+                                  <option selected disabled>-- أختر القسم --</option>
+                                  <div class="form-group">
+                                      @foreach ($section as $sec)
+                                          <option value="{{ $sec->id }}" @selected($sec->section_id == $sec->id)>
+                                              {{ $sec->section_name }}</option>
+                                      @endforeach
+                              </select>
+                              @error('section_id')
                                   <div class="alert alert-danger">{{ $message }}</div>
                               @enderror
                           </div>
                           <div class="form-group">
                               <label for="exampleInputDesc">الوصف</label>
-                              <textarea id="exampleInputDesc"  class="form-control" name="description"
-                                  placeholder="Textarea" rows="3">{{ $section->description }}</textarea>
+                              <textarea id="exampleInputDesc" class="form-control" name="description" placeholder="Textarea" rows="3">{{ $product->description }}</textarea>
                               @error('description')
                                   <div class="alert alert-danger">{{ $message }}</div>
                               @enderror

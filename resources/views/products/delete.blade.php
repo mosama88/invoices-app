@@ -1,5 +1,5 @@
         <!-- End Modal effects-->
-        <div class="modal" id="delete{{ $section->id }}">
+        <div class="modal" id="delete{{ $product->id }}">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content tx-size-sm">
                     <div class="modal-body tx-center pd-y-20 pd-x-20">
@@ -8,16 +8,16 @@
                             class="icon icon ion-ios-close-circle-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
                         <h4 class="tx-danger mg-b-20">إحذر: ستقوم بحذف العملية !</h4>
 
-                        <form action="{{ route('sections.destroy', $section->id) }}" method="post">
+                        <form action="{{ route('products.destroy', $product->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <div class="modal-body">
-                                <h5>{{ $section->name }}</h5>
+                                <h5>{{ $product->name }}</h5>
 
                                 <div class="form-group">
-                                    <input type="hidden" name="id" id="id" value="{{ $section->id }}">
+                                    <input type="hidden" name="id" id="id" value="{{ $product->id }}">
 
-                                    <input type="hidden" name="id" value="{{ $section->id }}">
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
                                 </div>
                             </div>
                             <div class="modal-footer mx-auto">
