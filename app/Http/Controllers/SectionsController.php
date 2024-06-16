@@ -118,8 +118,12 @@ class SectionsController extends Controller
     }
 
    
-    public function destroy(Sections $sections)
+    public function destroy(Request $request)
     {
-        //
+        Sections::findOrFail($request->id)->delete();
+
+        // Return a response indicating success
+        session()->flash('success', 'تم حذف القسم بنجاح');
+        return redirect()->route('sections.index');
     }
 }
