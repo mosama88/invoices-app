@@ -15,7 +15,8 @@ class InvoicesController extends Controller
 
     public function create()
     {
-        //
+        return view('invoices.add');
+
     }
 
 

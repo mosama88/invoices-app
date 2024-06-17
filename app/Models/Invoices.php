@@ -24,4 +24,14 @@ class Invoices extends Model
         'note',
         'user',
     ];
+
+
+
+    public function section(){
+        return $this->belongsTo(Section::class);
+    }
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 }
