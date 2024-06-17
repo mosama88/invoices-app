@@ -43,63 +43,52 @@
                     <h4 class="card-title mb-1">أضف فاتورة</h4>
                 </div>
                 <div class="card-body pt-0">
-                    <form>
+                    <form action="{{ route('Invoices.store') }}" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="form-group col-4">
                                 <label for="exampleInputText">رقم الفاتورة</label>
-                                <input type="text" class="form-control" id="exampleInputText">
+                                <input type="text" name="invoice_number" class="form-control" id="exampleInputText">
                             </div>
                             <div class="form-group col-4">
                                 <label for="datepickerNoOfMonths">تاريخ الفاتورة</label>
-                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
+                                <input class="form-control" name="invoice_date" placeholder="MM/DD/YYYY" type="date">
                             </div>
 
                             <div class="form-group col-4">
                                 <label for="datepickerNoOfMonths">تاريخ الأستحقاق</label>
-                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
+                                <input class="form-control" name="due_date" placeholder="MM/DD/YYYY" type="date">
                             </div>
                             <div class="form-group col-4">
                                 <label for="exampleInputSection">القسم</label>
-                                <select id="exampleInputSection" class="form-control select2-no-search">
-                                    <option label="Choose one">
-                                    </option>
-                                    <option value="Firefox">
-                                        Firefox
-                                    </option>
-                                    <option value="Chrome">
-                                        Chrome
-                                    </option>
+                                <select id="exampleInputSection" name="section" class="form-control select2-no-search"
+                                    onclick="console.log($(this).val())" onchange="console.log('change is firing')">
+                                    <option label="Choose one" selected disabled>-- حدد القسم --</option>
+                                    @foreach ($sections as $section)
+                                        <option value="{{ $section->id }}">{{ $section->section_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-4">
                                 <label for="exampleInputProduct">المنتج</label>
-                                <select id="exampleInputProduct" class="form-control select2-no-search">
-                                    <option label="Choose one">
-                                    </option>
-                                    <option value="Firefox">
-                                        Firefox
-                                    </option>
-                                    <option value="Chrome">
-                                        Chrome
-                                    </option>
-                                </select>
+                                <select id="product" name="product" class="form-control"></select>
                             </div>
                             <div class="form-group col-4">
                                 <label for="exampleInputTahsel">مبلغ التحصيل</label>
-                                <input type="text" class="form-control" id="exampleInputTahsel">
+                                <input type="text" name="invoice_number" class="form-control" id="exampleInputTahsel">
                             </div>
                             <div class="form-group col-4">
                                 <label for="exampleInputOmola">مبلغ العمولة</label>
-                                <input type="text" class="form-control" id="exampleInputOmola">
+                                <input type="text" name="invoice_number" class="form-control" id="exampleInputOmola">
 
                             </div>
                             <div class="form-group col-4">
                                 <label for="exampleInputDisc">الخصم</label>
-                                <input type="text" class="form-control" id="exampleInputDisc">
+                                <input type="text" name="discount" class="form-control" id="exampleInputDisc">
                             </div>
                             <div class="form-group col-4">
                                 <label for="exampleInputTaxVal">نسبة ضريبة القيمه المضافة</label>
-                                <select id="exampleInputTaxVal" class="form-control select2-no-search">
+                                <select id="exampleInputTaxVal" name="value_status" class="form-control select2-no-search">
                                     <option label="Choose one">
                                     </option>
                                     <option value="Firefox">
@@ -112,16 +101,18 @@
                             </div>
                             <div class="form-group col-6">
                                 <label for="exampleInputTaxAdd">قيمة ضريبة القيمه المضافة</label>
-                                <input type="text" class="form-control" id="exampleInputTaxAdd" readonly>
+                                <input type="text" name="value_vate" class="form-control" id="exampleInputTaxAdd"
+                                    readonly>
                             </div>
                             <div class="form-group col-6">
                                 <label for="exampleInputTotaltax">الأجمالى شامل الضريبه</label>
-                                <input type="text" class="form-control" id="exampleInputTotaltax" readonly>
+                                <input type="text" name="total" class="form-control" id="exampleInputTotaltax"
+                                    readonly>
                             </div>
 
                             <div class="form-group col-12">
                                 <label for="exampleInputTotaltax">ملاحظات</label>
-                                <textarea class="form-control" placeholder="Textarea" rows="3"></textarea>
+                                <textarea class="form-control" name="note" placeholder="Textarea" rows="3"></textarea>
                             </div>
                             <div class="form-group col-12">
                                 <label for="exampleInputTotaltax">المرفقات</label>
@@ -183,4 +174,44 @@
     <!-- Internal TelephoneInput js-->
     <script src="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/telephoneinput/inttelephoneinput.js') }}"></script>
+
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            // Event listener for changes on the section dropdown
+            $('select[name="section"]').on('change', function() {
+                var SectionId = $(this).val(); // Get the selected section ID
+
+                if (SectionId) {
+                    // AJAX request to get products based on section ID
+                    $.ajax({
+                        url: `{{ URL::to('sections') }}/${SectionId}`,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            var productSelect = $('select[name="product"]');
+                            productSelect.empty(); // Clear the product dropdown
+
+                            // Append new options to the product dropdown
+                            $.each(data, function(key, value) {
+                                productSelect.append(
+                                    `<option value="${value}">${value}</option>`);
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX request failed:', status, error);
+                        }
+                    });
+                } else {
+                    console.log('No section selected or invalid section ID');
+                }
+            });
+        });
+    </script>
+
+
+
 @endsection

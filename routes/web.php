@@ -27,6 +27,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/Invoices', InvoicesController::class);
+    Route::get('/sections/{id}', [InvoicesController::class,'getProducts']);
 Route::resource('/sections', SectionsController::class);
 Route::resource('/products', ProductController::class);
 // Authintication
