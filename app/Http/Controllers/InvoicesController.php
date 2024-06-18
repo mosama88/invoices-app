@@ -16,7 +16,8 @@ class InvoicesController extends Controller
 
     public function index()
     {
-        return view('invoices.index');
+        $invoices = Invoices::orderBy('created_at', 'desc')->get();
+        return view('invoices.index', compact('invoices'));
     }
 
 
@@ -81,7 +82,7 @@ class InvoicesController extends Controller
 //payment_Date
 
         session()->flash('Add', 'تم اضافة الفاتورة بنجاح');
-        return back();
+        return redirect()->route('Invoices');
     }
 
 

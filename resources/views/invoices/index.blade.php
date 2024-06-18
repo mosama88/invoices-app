@@ -40,37 +40,63 @@
                         <table class="table text-md-nowrap" id="example2">
                             <thead>
                                 <tr>
-                                    <th class="wd-15p border-bottom-0">#</th>
-                                    <th class="wd-15p border-bottom-0">رقم الفاتورة</th>
-                                    <th class="wd-15p border-bottom-0">تاريخ الفاتورة</th>
-                                    <th class="wd-20p border-bottom-0">تاريخ الاستحقاق</th>
-                                    <th class="wd-15p border-bottom-0">المنتج</th>
-                                    <th class="wd-10p border-bottom-0">القسم</th>
-                                    <th class="wd-10p border-bottom-0">الخصم</th>
-                                    <th class="wd-10p border-bottom-0">نسبة الضريبه</th>
-                                    <th class="wd-10p border-bottom-0">قيمة الضريبه</th>
-                                    <th class="wd-10p border-bottom-0">الاجمالى</th>
-                                    <th class="wd-10p border-bottom-0">الحالة</th>
-                                    <th class="wd-10p border-bottom-0">ملاحظات</th>
-                                    <th class="wd-10p border-bottom-0">العمليات</th>
+                                    <th class="">#</th>
+                                    <th class="">رقم الفاتورة</th>
+                                    <th class="">تاريخ الفاتورة</th>
+                                    <th class="">تاريخ الاستحقاق</th>
+                                    <th class="">القسم</th>
+                                    <th class="">المنتج</th>
+                                    <th class="">الخصم</th>
+                                    <th class="">نسبة الضريبه</th>
+                                    <th class="">قيمة الضريبه</th>
+                                    <th class="">الاجمالى</th>
+                                    <th class="">الحالة</th>
+                                    <th class="">ملاحظات</th>
+                                    <th class="">العمليات</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php $i = 0;?>
+                            @foreach($invoices as $invoice)
+                                    <?php $i++;?>
+
                                 <tr>
-                                    <td>1</td>
-                                    <td>15529</td>
-                                    <td>13-7-2023</td>
-                                    <td>13-9-2023</td>
-                                    <td>CC</td>
-                                    <td>البنك الاهلى</td>
-                                    <td>1000</td>
-                                    <td>10%</td>
-                                    <td>2500</td>
-                                    <td>3900</td>
-                                    <td>تم الدفع</td>
-                                    <td>لا يوجد خصم</td>
-                                    <td>b.Chloe@datatables.net</td>
-                                </tr>   
+                                    <td>{{$i}}</td>
+                                    <td>{{$invoice->invoice_number}}</td>
+                                    <td>{{$invoice->invoice_date}}</td>
+                                    <td>{{$invoice->due_date}}</td>
+                                    <td>
+                                        <a href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">{{ $invoice->section->section_name }}</a>
+                                    </td>
+                                    <td>{{$invoice->product}}</td>
+                                    <td>{{$invoice->discount}}</td>
+                                    <td>{{$invoice->rate_vat}}</td>
+                                    <td>{{$invoice->value_vate}}</td>
+                                    <td>{{$invoice->total}}</td>
+                                    <td>
+                                        @if ($invoice->value_Status == 1)
+                                            <span class="text-success">{{ $invoice->status }}</span>
+                                        @elseif($invoice->value_Status == 2)
+                                            <span class="text-danger">{{ $invoice->status }}</span>
+                                        @else
+                                            <span class="text-warning">{{ $invoice->status }}</span>
+                                        @endif
+
+                                    </td>
+                                    <td>ل{{$invoice->note}}</td>
+                                    <td>
+                                        {{-- Edit --}}
+                                        <a class="modal-effect btn btn-outline-info btn-sm" data-effect="effect-scale"
+                                           data-toggle="modal" href="#edit{{ $invoice->id }}"><i
+                                                class="fas fa-edit"></i></a>
+
+                                        {{-- Delete --}}
+                                        <a class="modal-effect btn btn-outline-danger btn-sm" data-effect="effect-scale"
+                                           data-toggle="modal" href="#delete{{ $invoice->id }}">
+                                            <i class="fas fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

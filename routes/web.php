@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InvoicesDetailsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -27,9 +28,13 @@ Route::get('/', function () {
 });
 
 Route::resource('/Invoices', InvoicesController::class);
-    Route::get('/sections/{id}', [InvoicesController::class,'getProducts']);
+Route::get('/sections/{id}', [InvoicesController::class,'getProducts']);
 Route::resource('/sections', SectionsController::class);
 Route::resource('/products', ProductController::class);
+Route::get('/InvoicesDetails/{id}', [InvoicesDetailsController::class,'sectionGet']);
+Route::post('delete_file', [InvoicesDetailsController::class,'destroy'])->name('delete_file');;
+
+
 // Authintication
 Auth::routes();
 // Auth::routes(['register' => false]);
