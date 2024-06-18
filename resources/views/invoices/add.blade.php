@@ -75,39 +75,39 @@
                             </div>
                             <div class="form-group col-4">
                                 <label for="exampleInputTahsel">مبلغ التحصيل</label>
-                                <input type="text" name="invoice_number" class="form-control" id="exampleInputTahsel">
-                            </div>
+                                <input type="text" class="form-control" id="inputName" name="Amount_collection"
+                                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">                            </div>
                             <div class="form-group col-4">
                                 <label for="exampleInputOmola">مبلغ العمولة</label>
-                                <input type="text" name="invoice_number" class="form-control" id="exampleInputOmola">
-
+                                <input type="text" class="form-control form-control-lg" id="Amount_Commission"
+                                       name="Amount_Commission" title="يرجي ادخال مبلغ العمولة "
+                                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                       required>
                             </div>
                             <div class="form-group col-4">
                                 <label for="exampleInputDisc">الخصم</label>
-                                <input type="text" name="discount" class="form-control" id="exampleInputDisc">
-                            </div>
+                                <input type="text" class="form-control form-control-lg" id="Discount" name="Discount"
+                                       title="يرجي ادخال مبلغ الخصم "
+                                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                       value=0 required>                            </div>
                             <div class="form-group col-4">
                                 <label for="exampleInputTaxVal">نسبة ضريبة القيمه المضافة</label>
-                                <select id="exampleInputTaxVal" name="value_status" class="form-control select2-no-search">
-                                    <option label="Choose one">
-                                    </option>
-                                    <option value="Firefox">
-                                        Firefox
-                                    </option>
-                                    <option value="Chrome">
-                                        Chrome
-                                    </option>
+                                <select name="Rate_VAT" id="Rate_VAT" class="form-control" onchange="myFunction()">
+                                    <!--placeholder-->
+                                    <option value="" selected disabled>حدد نسبة الضريبة</option>
+                                    <option value=" 5%">5%</option>
+                                    <option value="10%">10%</option>
                                 </select>
                             </div>
                             <div class="form-group col-6">
                                 <label for="exampleInputTaxAdd">قيمة ضريبة القيمه المضافة</label>
-                                <input type="text" name="value_vate" class="form-control" id="exampleInputTaxAdd"
-                                    readonly>
+                                <input type="text" class="form-control" id="Value_VAT" name="Value_VAT" readonly>
+
                             </div>
                             <div class="form-group col-6">
                                 <label for="exampleInputTotaltax">الأجمالى شامل الضريبه</label>
-                                <input type="text" name="total" class="form-control" id="exampleInputTotaltax"
-                                    readonly>
+                                <input type="text" class="form-control" id="Total" name="Total" readonly>
+
                             </div>
 
                             <div class="form-group col-12">
@@ -116,6 +116,7 @@
                             </div>
                             <div class="form-group col-12">
                                 <label for="exampleInputTotaltax">المرفقات</label>
+                                <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
                                 <input id="demo" type="file" name="files"
                                     accept=".jpg, .png, image/jpeg, image/png, html, zip, css,js" multiple>
                             </div>
@@ -212,6 +213,40 @@
         });
     </script>
 
+
+    <script>
+        function myFunction() {
+
+            var Amount_Commission = parseFloat(document.getElementById("Amount_Commission").value);
+            var Discount = parseFloat(document.getElementById("Discount").value);
+            var Rate_VAT = parseFloat(document.getElementById("Rate_VAT").value);
+            var Value_VAT = parseFloat(document.getElementById("Value_VAT").value);
+
+            var Amount_Commission2 = Amount_Commission - Discount;
+
+
+            if (typeof Amount_Commission === 'undefined' || !Amount_Commission) {
+
+                alert('يرجي ادخال مبلغ العمولة ');
+
+            } else {
+                var intResults = Amount_Commission2 * Rate_VAT / 100;
+
+                var intResults2 = parseFloat(intResults + Amount_Commission2);
+
+                sumq = parseFloat(intResults).toFixed(2);
+
+                sumt = parseFloat(intResults2).toFixed(2);
+
+                document.getElementById("Value_VAT").value = sumq;
+
+                document.getElementById("Total").value = sumt;
+
+            }
+
+        }
+
+    </script>
 
 
 @endsection
