@@ -82,7 +82,7 @@ class InvoicesController extends Controller
 //payment_Date
 
         session()->flash('Add', 'تم اضافة الفاتورة بنجاح');
-        return redirect()->route('Invoices');
+        return redirect()->route('Invoices.index');
     }
 
 

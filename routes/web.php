@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InvoiceAttachmentsController;
 use App\Http\Controllers\InvoicesDetailsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,10 @@ Route::resource('/sections', SectionsController::class);
 Route::resource('/products', ProductController::class);
 Route::get('/InvoicesDetails/{id}', [InvoicesDetailsController::class,'sectionGet']);
 Route::post('delete_file', [InvoicesDetailsController::class,'destroy'])->name('delete_file');;
+Route::resource('InvoiceAttachments', InvoiceAttachmentsController::class);
+Route::get('View_file/{invoice_number}/{file_name}', [InvoicesDetailsController::class,'open_file']);
+Route::get('download/{invoice_number}/{file_name}', [InvoicesDetailsController::class,'get_file']);
+
 
 
 // Authintication

@@ -77,4 +77,22 @@ class InvoicesDetailsController extends Controller
         $attachments  = invoiceAttachment::where('invoice_id',$id)->get();
         return view('invoices.details_invoice',compact('invoices','details','attachments'));
     }
+
+
+
+    public function get_file($invoice_number,$file_name)
+
+    {
+        $contents= Storage::disk('public_uploads')->getDriver()->getAdapter()->applyPathPrefix($invoice_number.'/'.$file_name);
+        return response()->download( $contents);
+    }
+
+
+
+    public function open_file($invoice_number,$file_name)
+
+    {
+        $files = Storage::disk('public_uploads')->getDriver()->getAdapter()->applyPathPrefix($invoice_number.'/'.$file_name);
+        return response()->file($files);
+    }
 }
