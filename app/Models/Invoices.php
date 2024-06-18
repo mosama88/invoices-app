@@ -10,19 +10,21 @@ class Invoices extends Model
     use HasFactory;
 
     protected $fillable = [
-        'invoice_number',
-        'invoice_date',
-        'due_date',
-        'product',
-        'section',
-        'discount',
-        'rate_vat',
-        'value_vate',
-        'total',
-        'status',
-        'value_status',
-        'note',
-        'user',
+'invoice_number',
+'invoice_date',
+'due_date',
+'product',
+'section_id',
+'amount_collection',
+'amount_Commission',
+'discount',
+'rate_vat',
+'value_vate',
+'total',
+'status',
+'value_status',
+'note',
+'user',
     ];
 
 

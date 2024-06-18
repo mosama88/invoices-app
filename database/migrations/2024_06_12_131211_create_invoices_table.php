@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('product');
 //            $table->string('section');
             $table->foreignId('section_id')->references('id')->on('sections')->cascadeOnDelete();
-            $table->decimal('Amount_collection',8,2)->nullable();
-            $table->decimal('Amount_Commission',8,2);
+            $table->decimal('amount_collection',8,2)->nullable();
+            $table->decimal('amount_Commission',8,2);
             $table->string('discount');
             $table->string('rate_vat');  //نسبة الضريبه
             $table->decimal('value_vate',8,2);  // قيمة الضريبه

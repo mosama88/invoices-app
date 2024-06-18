@@ -22,20 +22,19 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_name'=>'required|unique:products|min:3|max:200',
+            'product_name'=>'required|min:3|max:200',
             'section_id'=>'nullable|exists:sections,id',
             'description'=>'nullable|min:3|max:200',
         ];
     }
-    
-    
-    
+
+
+
     public function messages(): array
     {
         return [
             'product_name.required'=>'أسم المنتج مطلوب',
             'product_name.min'=>'يجب ان يكون أسم المنتج أكثر من 3 أحرف',
-            'product_name.unique'=>'المنتج مسجل بالفعل',
             'product_name.max'=>'يجب ان يكون أسم المنتج أقل من 200 حرف',
             ########################################################
             'description.min'=>'يجب ان يكون حقل الملاحظات 3 رقم',

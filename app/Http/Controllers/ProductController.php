@@ -39,7 +39,7 @@ class ProductController extends Controller
         $products->product_name = $request->product_name;
         $products->section_id = $request->section_id;
         $products->description = $request->description;
-    
+
         $products->save();
         return redirect()->route('products.index')->with('success', 'تم أضافة المنتج بنجاح');
     }
@@ -65,18 +65,16 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, string $id)
     {
-        $id=$request->id;
-        
+
         $products = $request->validate([
-            'product_name'=>'required|min:3|max:200|unique:products,product_name,'.$id,
+            'product_name'=>'required|min:3|max:200',
             'section_id'=>'nullable|exists:sections,id',
             'description'=>'nullable',
         ],[
             'product_name.required'=>'أسم المنتج مطلوب',
             'product_name.min'=>'يجب ان يكون أسم المنتج أكثر من 3 أحرف',
-            'product_name.unique'=>'المنتج مسجل بالفعل',
             'section_name.max'=>'يجب ان يكون أسم المنتج أقل من 200 حرف',
             ########################################################
             'description.min'=>'يجب ان يكون حقل الموبايل 3 رقم',
@@ -89,20 +87,20 @@ class ProductController extends Controller
             $products->section_id = $request->section_id,
             $products->description = $request->description,
         ]);
-         
-        
-       
+
+
+
         return redirect()->route('products.index')->with('success', 'تم تعديل المنتج بنجاح');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-  
+
      public function destroy(Request $request)
      {
          Product::findOrFail($request->id)->delete();
- 
+
          // Return a response indicating success
          session()->flash('success', 'تم حذف المنتج بنجاح');
          return redirect()->route('products.index');
