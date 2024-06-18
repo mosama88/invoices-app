@@ -29,7 +29,6 @@ return new class extends Migration
             $table->integer('value_status');  //1, 2, 3
             $table->text('note')->nullable();
             // $table->date('Payment_Date')->nullable();
-            $table->string('user');
             $table->softDeletes();   //أرشفه
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('invoice_number', 50);
             $table->foreignId('invoice_id')->references('id')->on('invoices')->cascadeOnDelete();
             $table->string('product', 50);
-            $table->string('section', 999);
+            $table->string('section_id', 999);
             $table->string('status', 50);
             $table->integer('value_Status');
             $table->date('payment_Date')->nullable();

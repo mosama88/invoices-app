@@ -12,7 +12,7 @@ class InvoicesDetail extends Model
 'invoice_number',
 'invoice_id',
 'product',
-'section',
+'section_id',
 'status',
 'value_Status',
 'payment_Date',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoices;
+use App\Models\InvoicesDetail;
 use App\Models\Product;
 use App\Models\Section;
 use Illuminate\Http\Request;
@@ -44,8 +45,23 @@ class InvoicesController extends Controller
             'status'=>'غير مدفوعه',
             'value_status'=>2,
             'note'=>$request->note,
-            'user' => Auth::user()->name,
         ]);
+
+        $invoices_id = Invoices::latest()->first()->id;
+        InvoicesDetail::create([
+            'invoice_id' => $invoices_id,
+            'invoice_number' => $request->invoice_number,
+            'product' => $request->product,
+            'section_id' => $request->section_id,
+            'status' => 'غير مدفوعة',
+            'value_Status' => 2,
+            'note' => $request->note,
+            'user' => (Auth::user()->name),
+        ]);
+
+
+//payment_Date
+
         session()->flash('Add', 'تم اضافة الفاتورة بنجاح');
         return back();
     }

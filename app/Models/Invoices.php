@@ -24,8 +24,9 @@ class Invoices extends Model
 'status',
 'value_status',
 'note',
-'user',
     ];
+
+    protected $dates = ['deleted_at'];
 
 
 
