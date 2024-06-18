@@ -43,6 +43,18 @@
                     <h4 class="card-title mb-1">أضف فاتورة</h4>
                 </div>
                 <div class="card-body pt-0">
+
+                    @if (session()->has('Add'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session()->get('Add') }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
+
+
                     <form action="{{ route('Invoices.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="row">
@@ -117,8 +129,10 @@
                             <div class="form-group col-12">
                                 <label for="exampleInputTotaltax">المرفقات</label>
                                 <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
-                                <input id="demo" type="file" name="files"
-                                    accept=".jpg, .png, image/jpeg, image/png, html, zip, css,js" multiple>
+
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
+                                           data-height="70" />
                             </div>
 
 
@@ -140,6 +154,15 @@
     <!-- main-content closed -->
 @endsection
 @section('js')
+
+    <script>
+        var date = $('.fc-datepicker').datepicker({
+            dateFormat: 'yy-mm-dd'
+        }).val();
+
+    </script>
+
+    
     <!--Internal  Datepicker js -->
     <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
     <!--Internal  jquery.maskedinput js -->

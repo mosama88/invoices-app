@@ -7,11 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class invoiceAttachment extends Model
 {
-    use HasFactory;
-    public $fillable =[
-'file_name',
-'invoice_number',
-'created_by',
-'invoice_id',
-    ];
+//
 }

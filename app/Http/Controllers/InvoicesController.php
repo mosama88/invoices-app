@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\invoiceAttachment;
 use App\Models\Invoices;
 use App\Models\InvoicesDetail;
 use App\Models\Product;
@@ -59,6 +60,23 @@ class InvoicesController extends Controller
             'user' => (Auth::user()->name),
         ]);
 
+        if ($request->hasFile('pic')) {
+            $invoice_id = Invoices::latest()->first()->id;
+            $image = $request->file('pic');
+            $file_name = $image->getClientOriginalName();
+            $invoice_number = $request->invoice_number;
+
+            $attachments = new invoiceAttachment();
+            $attachments->file_name = $file_name;
+            $attachments->invoice_number = $invoice_number;
+            $attachments->created_by = Auth::user()->name;
+            $attachments->invoice_id = $invoice_id;
+            $attachments->save();
+
+            // move pic
+            $imageName = $request->pic->getClientOriginalName();
+            $request->pic->move(public_path('Attachments/' . $invoice_number), $imageName);
+        }
 
 //payment_Date
 
